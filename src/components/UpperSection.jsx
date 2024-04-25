@@ -2,12 +2,25 @@ import React from "react";
 import iconArrow from "../images/icon-arrow.svg";
 import iconAngleLeft from "../images/icon-angle-left.svg";
 import iconAngleRight from "../images/icon-angle-right.svg";
+import logo from "../images/logo.svg";
+import NavLinks from "./NavLinks";
 
 function UpperSection() {
   return (
     <section id="upper-section">
       <section className="main-image-grid">
-        
+        <nav>
+          <div className="logo">
+            <img src={logo} alt="Room" />
+          </div>
+
+          <div className="menu-btns">
+            <NavLinks title="home" />
+            <NavLinks title="shop" />
+            <NavLinks title="about" />
+            <NavLinks title="contact" />
+          </div>
+        </nav>
       </section>
 
       <section className="main-context-grid">

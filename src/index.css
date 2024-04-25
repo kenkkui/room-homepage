@@ -36,6 +36,47 @@
   background-image: url("./images/desktop-image-hero-1.jpg");
 }
 
+nav {
+  margin: 60px 50px;
+  display: flex;
+  gap: 50px;
+}
+
+.menu-btns {
+  display: flex;
+  gap: 30px;
+}
+
+.menu-btns a {
+  text-decoration: none;
+  color: var(--white);
+  position: relative;
+}
+
+@keyframes menu-btns-animation {
+  from {
+    width: 0px;
+  }
+
+  to {
+    width: 20px;
+  }
+}
+
+.menu-btns a:hover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+
+  width: 20px;
+  height: 3px;
+  background-color: var(--white);
+  animation: menu-btns-animation 0.25s forwards;
+}
+
 #lower-section::before,
 #lower-section::after,
 .main-image-grid {
