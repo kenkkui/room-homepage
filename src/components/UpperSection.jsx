@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import iconArrow from "../images/icon-arrow.svg";
 import logo from "../images/logo.svg";
 import NavLinks from "./NavLinks";
@@ -7,8 +7,6 @@ import BtnContainer from "./BtnContainer";
 import image1 from "../images/desktop-image-hero-1.jpg";
 import image2 from "../images/desktop-image-hero-2.jpg";
 import image3 from "../images/desktop-image-hero-3.jpg";
-import iconAngleLeft from "../images/icon-angle-left.svg";
-import iconAngleRight from "../images/icon-angle-right.svg";
 
 const PAGES = [
   {

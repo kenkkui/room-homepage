@@ -248,7 +248,37 @@ nav {
 
   margin-bottom: 15px;
 }
-
+/* desktop sizes */
 @media (max-height:810px) {
+  .main-context-grid {
+    padding: 110px 80px;
+  }
+
+  .about-our-furniture {
+    padding: 10px 30px;
+  }
+
+  #about-title {
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .main-context-text,
+  #about-text {
+    font-size: 16px;
+    color: var(--dark-grey);
+    line-height: 130%;
+  }
   
+}
+
+@media (max-height:750px) {
+  .main-context-grid {
+    padding: 90px 70px;
+  }
+
+  .about-our-furniture {
+    padding: 10px 20px;
+  }
 }
