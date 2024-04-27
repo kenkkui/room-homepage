@@ -1,29 +1,15 @@
 import React, { useState, useRef } from "react";
-import iconArrow from "../images/icon-arrow.svg";
 import logo from "../images/logo.svg";
+import hamburger from "../images/icon-hamburger.svg";
+import closeIcon from "../images/icon-close.svg";
+
 import NavLinks from "./NavLinks";
 import BtnContainer from "./BtnContainer";
-
-import image1 from "../images/desktop-image-hero-1.jpg";
-import image2 from "../images/desktop-image-hero-2.jpg";
-import image3 from "../images/desktop-image-hero-3.jpg";
-
-const PAGES = [
-  {
-    title: "Discover innovative ways to decorate",
-    text: "We provide unmatched quality, comfort, and style for property owners across the country. Our experts combine form and function in bringing your vision to life. Create a room in your own style with our collection and make your property a reflection of you and what you love.",
-  },
-  {
-    title: "We are available all across the globe",
-    text: "With storesf all over the world, it's easy for you to fiond furniture for your home or place of business. Locally, we're in the most major cities throughout the country. Find the branch neasrest using our store locator. Any questions? Don't hesitate to contact us today.",
-  },
-  {
-    title: "Manufactured with the best materials",
-    text: "Our modern furnitures store provide a high level of quality. Our company has invested in advanced technology to ensure that every product is made as perfect and as consistent as possible. With three decades of experiences in this industry, we understand what customers want for their home and office.",
-  },
-];
+import Carousel from "./Carousel";
+import ContextGrid from "./ContextGrid";
 
 function UpperSection() {
+  const [openDropDown, setopenDropDown] = useState(false);
   const [page, setPage] = useState(0);
   const carouselElem = useRef();
 
@@ -50,24 +36,33 @@ function UpperSection() {
     }
   }
 
+  function handleOpenMenu() {
+    setopenDropDown((prev) => !prev);
+  }
+
   return (
     <section id="upper-section">
-      <section className="main-image-grid">
-        <div className={`carousel`} ref={carouselElem}>
-          <ul>
-            <li className="slide">
-              <img src={image1} alt="image" />
-            </li>
-            <li className="slide">
-              <img src={image2} alt="image" />
-            </li>
-            <li className="slide">
-              <img src={image3} alt="image" />
-            </li>
-          </ul>
-        </div>
+      {openDropDown && (
+        <section className="drop-down-menu">
+          <div className="drop-down">
+            <div className="close-icon" onClick={handleOpenMenu}>
+              <img src={closeIcon} alt="Close menu" />
+            </div>
 
-        <nav>
+            <div className="menu-btns" data-mobile-nav="true">
+              <NavLinks title="home" />
+              <NavLinks title="shop" />
+              <NavLinks title="about" />
+              <NavLinks title="contact" />
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="main-image-grid">
+        <Carousel forwardedRef={carouselElem} />
+
+        <nav className="desktop-navbar">
           <div className="logo">
             <img src={logo} alt="Room" />
           </div>
@@ -79,17 +74,19 @@ function UpperSection() {
             <NavLinks title="contact" />
           </div>
         </nav>
+
+        <nav className="mobile-navbar">
+          <div className="hamburger">
+            <img src={hamburger} alt="Menu Icon" onClick={handleOpenMenu} />
+          </div>
+
+          <div className="logo">
+            <img src={logo} alt="Room" />
+          </div>
+        </nav>
       </section>
 
-      <section className="main-context-grid">
-        <h1 className="main-context-title">{PAGES[page].title}</h1>
-        <p className="main-context-text">{PAGES[page].text}</p>
-
-        <a href="/" className="shop-now-link">
-          shop now
-          <img src={iconArrow} alt="Shop now!" />
-        </a>
-      </section>
+      <ContextGrid page={page} />
 
       <BtnContainer onClick={handleClick} />
     </section>
