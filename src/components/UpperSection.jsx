@@ -26,8 +26,8 @@ const PAGES = [
 ];
 
 function UpperSection() {
-  const carouselElem = useRef();
   const [page, setPage] = useState(0);
+  const carouselElem = useRef();
 
   function handleClick(e) {
     const attributeValue = e.target.getAttribute("data-button-prev");
@@ -35,15 +35,19 @@ function UpperSection() {
 
     if (carousel) {
       if (attributeValue) {
-        setPage((pageNum) => (pageNum -= 1));
+        if (page - 1 !== -1) {
+          setPage((pageNum) => (pageNum -= 1));
+        }
 
-        if (carousel.classList.contains(page)) {
-          carousel.classList.remove(page);
+        if (carousel.classList.contains("curr" + page)) {
+          carousel.classList.remove("curr" + page);
         }
       } else {
-        setPage((pageNum) => (pageNum += 1));
+        if (page + 1 !== 3) {
+          setPage((pageNum) => (pageNum += 1));
+        }
 
-        carousel.classList.add(page + 1);
+        carousel.classList.add("curr" + (page + 1));
       }
     }
   }
@@ -64,7 +68,7 @@ function UpperSection() {
             </li>
           </ul>
         </div>
-        {/* 
+
         <nav>
           <div className="logo">
             <img src={logo} alt="Room" />
@@ -76,7 +80,7 @@ function UpperSection() {
             <NavLinks title="about" />
             <NavLinks title="contact" />
           </div>
-        </nav> */}
+        </nav>
       </section>
 
       <section className="main-context-grid">
@@ -89,23 +93,7 @@ function UpperSection() {
         </a>
       </section>
 
-      <section className="btn-container">
-        <button
-          className="prev-btn"
-          onClick={handleClick}
-          data-button-prev="true"
-        >
-          <img src={iconAngleLeft} alt="previous button" />
-        </button>
-
-        <button
-          className="next-btn"
-          onClick={handleClick}
-          data-button-next="true"
-        >
-          <img src={iconAngleRight} alt="next button" />
-        </button>
-      </section>
+      <BtnContainer onClick={handleClick} />
     </section>
   );
 }
