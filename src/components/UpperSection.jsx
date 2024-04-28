@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import BtnContainer from "./BtnContainer";
 import Carousel from "./Carousel";
@@ -34,6 +34,8 @@ function UpperSection() {
           ...prev,
           endX: e.changedTouches[0].clientX,
         };
+
+        return updatedValues;
       });
 
       const deltaX = x.endX - x.startX;
