@@ -276,6 +276,7 @@
 
 
 .btn-container {
+  z-index: 1000;
   align-self: end;
   grid-area: 1 / 12 / 2 / 14;
 

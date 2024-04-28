@@ -13,16 +13,16 @@ function Carousel({ forwardedRef }) {
     <div className="carousel" ref={forwardedRef}>
       <ul>
         <li className="slide">
-          <img src={image1} alt="image" data-desktop-img="true" />
-          <img src={mobileImg1} alt="image" data-mobile-img="true" />
+          <img src={image1} alt="Our furniture" data-desktop-img="true" />
+          <img src={mobileImg1} alt="Our furniture" data-mobile-img="true" />
         </li>
         <li className="slide">
-          <img src={image2} alt="image" data-desktop-img="true" />
-          <img src={mobileImg2} alt="image" data-mobile-img="true" />
+          <img src={image2} alt="Our furniture" data-desktop-img="true" />
+          <img src={mobileImg2} alt="Our furniture" data-mobile-img="true" />
         </li>
         <li className="slide">
-          <img src={image3} alt="image" data-desktop-img="true" />
-          <img src={mobileImg3} alt="image" data-mobile-img="true" />
+          <img src={image3} alt="Our furniture" data-desktop-img="true" />
+          <img src={mobileImg3} alt="Our furniture" data-mobile-img="true" />
         </li>
       </ul>
     </div>

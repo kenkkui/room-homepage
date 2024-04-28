@@ -14,24 +14,22 @@ function UpperSection() {
   const carouselElem = useRef();
 
   function handleSlideClick(e) {
-    const attributeValue = e.target.getAttribute("data-button-prev");
+    const attributeValue = e.target.getAttribute("data-button-next");
     const carousel = carouselElem.current;
 
     if (carousel) {
       if (attributeValue) {
-        if (page - 1 !== -1) {
-          setPage((pageNum) => (pageNum -= 1));
-        }
-
-        if (carousel.classList.contains("curr" + page)) {
-          carousel.classList.remove("curr" + page);
-        }
-      } else {
         if (page + 1 !== 3) {
           setPage((pageNum) => (pageNum += 1));
+          carousel.classList.add("curr" + (page + 1));
         }
-
-        carousel.classList.add("curr" + (page + 1));
+      } else {
+        if (page - 1 !== -1) {
+          setPage((pageNum) => (pageNum -= 1));
+          if (carousel.classList.contains("curr" + page)) {
+            carousel.classList.remove("curr" + page);
+          }
+        }
       }
     }
   }
