@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import BtnContainer from "./BtnContainer";
 import Carousel from "./Carousel";
@@ -13,9 +13,15 @@ function UpperSection() {
 
   const carouselElem = useRef();
 
+  useEffect(() => {
+    window.addEventListener("keydown", handleArrowKey);
+
+    return () => window.removeEventListener("keydown", handleArrowKey);
+  }, []);
+
+  const carousel = carouselElem.current;
   function handleSlideClick(e) {
     const attributeValue = e.target.getAttribute("data-button-next");
-    const carousel = carouselElem.current;
 
     if (carousel) {
       if (attributeValue) {
@@ -25,6 +31,28 @@ function UpperSection() {
         }
       } else {
         if (page - 1 !== -1) {
+          setPage((pageNum) => (pageNum -= 1));
+          if (carousel.classList.contains("curr" + page)) {
+            carousel.classList.remove("curr" + page);
+          }
+        }
+      }
+    }
+  }
+
+  function handleArrowKey(e) {
+    const key = e.key;
+
+    if (carousel) {
+      if (key === "ArrowRight") {
+        if (page + 1 !== 3) {
+          console.log("nexing");
+          setPage((pageNum) => (pageNum += 1));
+          carousel.classList.add("curr" + (page + 1));
+        }
+      } else if (key === "ArrowLeft") {
+        if (page - 1 !== -1) {
+          console.log("backing");
           setPage((pageNum) => (pageNum -= 1));
           if (carousel.classList.contains("curr" + page)) {
             carousel.classList.remove("curr" + page);
