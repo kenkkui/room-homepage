@@ -1,12 +1,10 @@
 import React, { useState, useRef } from "react";
-import logo from "../images/logo.svg";
-import hamburger from "../images/icon-hamburger.svg";
-import closeIcon from "../images/icon-close.svg";
 
-import NavLinks from "./NavLinks";
 import BtnContainer from "./BtnContainer";
 import Carousel from "./Carousel";
 import ContextGrid from "./ContextGrid";
+import MobileNav from "./MobileNav";
+import DropDown from "./DropDown";
 
 function UpperSection() {
   const [openDropDown, setopenDropDown] = useState(false);
@@ -54,52 +52,17 @@ function UpperSection() {
   return (
     <section id="upper-section">
       {render && (
-        <section className={`drop-down-menu ${!openDropDown ? "close" : ""}`}>
-          <div
-            className={`drop-down ${
-              openDropDown ? "animation-open" : "animation-close"
-            }`}
-            onAnimationEnd={handleAnimationEnd}
-          >
-            <div className="close-icon" onClick={handleOpenMenu}>
-              <img src={closeIcon} alt="Close menu" />
-            </div>
-
-            <div className="menu-btns" data-mobile-nav="true">
-              <NavLinks title="home" />
-              <NavLinks title="shop" />
-              <NavLinks title="about" />
-              <NavLinks title="contact" />
-            </div>
-          </div>
-        </section>
+        <DropDown
+          onClick={handleOpenMenu}
+          animationEnd={handleAnimationEnd}
+          openDropDown={openDropDown}
+        />
       )}
 
       <section className="main-image-grid">
         <Carousel forwardedRef={carouselElem} />
 
-        <nav className="desktop-navbar">
-          <div className="logo">
-            <img src={logo} alt="Room" />
-          </div>
-
-          <div className="menu-btns">
-            <NavLinks title="home" />
-            <NavLinks title="shop" />
-            <NavLinks title="about" />
-            <NavLinks title="contact" />
-          </div>
-        </nav>
-
-        <nav className="mobile-navbar">
-          <div className="hamburger">
-            <img src={hamburger} alt="Menu Icon" onClick={handleOpenMenu} />
-          </div>
-
-          <div className="logo">
-            <img src={logo} alt="Room" />
-          </div>
-        </nav>
+        <MobileNav onClick={handleOpenMenu} />
       </section>
 
       <ContextGrid page={page} />
