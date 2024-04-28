@@ -10,55 +10,66 @@ function UpperSection() {
   const [openDropDown, setopenDropDown] = useState(false);
   const [render, setRender] = useState(false);
   const [page, setPage] = useState(0);
-
-  const carouselElem = useRef();
+  const [x, setX] = useState({
+    startX: "",
+    endX: "",
+  });
 
   useEffect(() => {
-    window.addEventListener("keydown", handleArrowKey);
+    function handleTouchStart(e) {
+      setX((prev) => {
+        const updatedValues = {
+          ...prev,
+          startX: e.touches[0].clientX,
+        };
 
-    return () => window.removeEventListener("keydown", handleArrowKey);
+        return updatedValues;
+      });
+    }
+
+    function handleTouchEnd(e) {
+      setX((prev) => {
+        const updatedValues = {
+          ...prev,
+          endX: e.changedTouches[0].clientX,
+        };
+      });
+
+      const deltaX = x.endX - x.startX;
+
+      if (deltaX > 0) {
+        setPage((pageNum) => (pageNum - 1 + 3) % 3);
+      } else if (deltaX < 0) {
+        setPage((pageNum) => (pageNum + 1) % 3);
+      }
+    }
+
+    document.addEventListener("keydown", handleArrowKey);
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      document.removeEventListener("keydown", handleArrowKey);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
   }, []);
 
-  const carousel = carouselElem.current;
-  function handleSlideClick(e) {
-    const attributeValue = e.target.getAttribute("data-button-next");
-
-    if (carousel) {
-      if (attributeValue) {
-        if (page + 1 !== 3) {
-          setPage((pageNum) => (pageNum += 1));
-          carousel.classList.add("curr" + (page + 1));
-        }
-      } else {
-        if (page - 1 !== -1) {
-          setPage((pageNum) => (pageNum -= 1));
-          if (carousel.classList.contains("curr" + page)) {
-            carousel.classList.remove("curr" + page);
-          }
-        }
-      }
+  function handleSlideClick(btnNum) {
+    if (btnNum === 2) {
+      setPage((pageNum) => (pageNum + 1) % 3);
+    } else {
+      setPage((pageNum) => (pageNum - 1 + 3) % 3);
     }
   }
 
   function handleArrowKey(e) {
     const key = e.key;
 
-    if (carousel) {
-      if (key === "ArrowRight") {
-        if (page + 1 !== 3) {
-          console.log("nexing");
-          setPage((pageNum) => (pageNum += 1));
-          carousel.classList.add("curr" + (page + 1));
-        }
-      } else if (key === "ArrowLeft") {
-        if (page - 1 !== -1) {
-          console.log("backing");
-          setPage((pageNum) => (pageNum -= 1));
-          if (carousel.classList.contains("curr" + page)) {
-            carousel.classList.remove("curr" + page);
-          }
-        }
-      }
+    if (key === "ArrowRight") {
+      setPage((pageNum) => (pageNum + 1) % 3);
+    } else if (key === "ArrowLeft") {
+      setPage((pageNum) => (pageNum - 1 + 3) % 3);
     }
   }
 
@@ -86,7 +97,7 @@ function UpperSection() {
       )}
 
       <section className="main-image-grid">
-        <Carousel forwardedRef={carouselElem} />
+        <Carousel page={page} />
 
         <MobileNav onClick={handleOpenMenu} />
       </section>

@@ -8,9 +8,13 @@ import mobileImg1 from "../images/mobile-image-hero-1.jpg";
 import mobileImg2 from "../images/mobile-image-hero-2.jpg";
 import mobileImg3 from "../images/mobile-image-hero-3.jpg";
 
-function Carousel({ forwardedRef }) {
+function Carousel({ page }) {
   return (
-    <div className="carousel" ref={forwardedRef}>
+    <div
+      className={`carousel ${page >= 1 ? "curr1" : ""} ${
+        page === 2 ? "curr2" : ""
+      }`}
+    >
       <ul>
         <li className="slide">
           <img src={image1} alt="Our furniture" data-desktop-img="true" />

@@ -380,7 +380,7 @@
 
 @media (max-width:1440px) {
   .main-context-grid {
-    padding: 110px 80px;
+    padding: 80px 60px;
   }
 
   .about-our-furniture {
@@ -388,8 +388,9 @@
   }
 
   #about-title {
-    letter-spacing: 10px;
+    letter-spacing: 6px;
     margin-bottom: 10px;
+    font-weight: 600;
     font-size: 20px;
   }
 
