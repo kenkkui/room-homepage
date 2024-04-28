@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../images/logo.svg";
+import NavLinks from "./NavLinks";
 
 function DesktopNav() {
   return (

@@ -5,6 +5,7 @@ import Carousel from "./Carousel";
 import ContextGrid from "./ContextGrid";
 import MobileNav from "./MobileNav";
 import DropDown from "./DropDown";
+import DesktopNav from "./DesktopNav";
 
 function UpperSection() {
   const [openDropDown, setopenDropDown] = useState(false);
@@ -99,6 +100,7 @@ function UpperSection() {
       <section className="main-image-grid">
         <Carousel page={page} />
 
+        <DesktopNav />
         <MobileNav onClick={handleOpenMenu} />
       </section>
 

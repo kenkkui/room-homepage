@@ -25,7 +25,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: https://github.com/kenkkui/room-homepage/tree/master
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: https://www.frontendmentor.io/solutions/responsive-homepage-of-room-using-react-w-animation-ACR5q71zQ9
 
 ## My process
 
@@ -42,8 +42,6 @@ Users should be able to:
 ### What I learned
 
 The only thing I learned here is how to make a Carousel. Uhm, I also learned how to loop how to loop throught the carousel using JS
-
-To see how you can add code snippets, see below:
 
 ```jsx
 <div
