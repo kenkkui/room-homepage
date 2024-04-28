@@ -34,11 +34,61 @@
   grid-template-columns: repeat(19, 1fr);
 }
 
+@keyframes opacity-open {
+  from {
+    opacity: 0;
+  }
+ 
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity-close {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 .drop-down-menu {
   z-index: 100;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
+  animation: opacity-anim linear 100ms forwards;
+}
+
+.drop-down-menu.close {
+  animation: opacity-close linear 200ms forwards;
+}
+
+.drop-down .close-icon {
+  transform: translateX(7px);
+}
+
+@keyframes drop-down-open {
+  0% {
+    padding: 10px 20px;
+  }
+
+  100% {
+    padding: 50px 20px;
+  }
+}
+
+@keyframes drop-down-close {
+  0% {
+    padding: 50px 20px;
+  }
+
+  100% {
+    padding: 10px 20px;
+    opacity: 0;
+  }
 }
 
 .drop-down {
@@ -47,6 +97,14 @@
 
   display: flex;
   justify-content: space-between;
+}
+
+.drop-down.animation-open {
+  animation: drop-down-open 500ms forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.drop-down.animation-close {
+  animation: drop-down-close 200ms forwards cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .main-image-grid {
@@ -283,6 +341,7 @@
   margin-bottom: 15px;
 }
 /* desktop sizes */
+
 @media (max-height:810px) {
   .main-context-grid {
     padding: 110px 80px;
@@ -315,9 +374,10 @@
     padding: 10px 20px;
   }
 }
-
 /* mobile sizes */
-@media (max-width:1364px) {
+
+
+@media (max-width:1440px) {
   .main-context-grid {
     padding: 110px 80px;
   }
@@ -391,6 +451,27 @@
     grid-template-rows: 1fr 1fr;
   }
 
+  #lower-section {
+    height: 100vh;
+    width: 100%;
+  
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  #lower-section::before {
+    grid-area: 1 / 1 / 2 / -1;
+  }
+
+  .about-our-furniture {
+    grid-area: 2 / 1 / 3 / -1;
+  }
+
+  #lower-section::after {
+    grid-area: 3 / 1 / 4 / -1;
+  }
+
   .main-image-grid {
     grid-area: 1 / 1 / 2 / 10;
   }
@@ -444,5 +525,15 @@
 
   .mobile-navbar {
     display: flex;
+  }
+}
+
+@media (max-width:320px) {
+  .main-context-title {
+    font-size: 36px;
+  }
+
+  .shop-now-link {
+    letter-spacing: 10px;
   }
 }

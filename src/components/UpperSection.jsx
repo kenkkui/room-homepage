@@ -10,10 +10,12 @@ import ContextGrid from "./ContextGrid";
 
 function UpperSection() {
   const [openDropDown, setopenDropDown] = useState(false);
+  const [render, setRender] = useState(false);
   const [page, setPage] = useState(0);
+
   const carouselElem = useRef();
 
-  function handleClick(e) {
+  function handleSlideClick(e) {
     const attributeValue = e.target.getAttribute("data-button-prev");
     const carousel = carouselElem.current;
 
@@ -37,14 +39,28 @@ function UpperSection() {
   }
 
   function handleOpenMenu() {
+    setRender(true);
     setopenDropDown((prev) => !prev);
+  }
+
+  function handleAnimationEnd(e) {
+    const name = e.animationName;
+
+    if (name === "drop-down-close") {
+      setRender(false);
+    }
   }
 
   return (
     <section id="upper-section">
-      {openDropDown && (
-        <section className="drop-down-menu">
-          <div className="drop-down">
+      {render && (
+        <section className={`drop-down-menu ${!openDropDown ? "close" : ""}`}>
+          <div
+            className={`drop-down ${
+              openDropDown ? "animation-open" : "animation-close"
+            }`}
+            onAnimationEnd={handleAnimationEnd}
+          >
             <div className="close-icon" onClick={handleOpenMenu}>
               <img src={closeIcon} alt="Close menu" />
             </div>
@@ -88,7 +104,7 @@ function UpperSection() {
 
       <ContextGrid page={page} />
 
-      <BtnContainer onClick={handleClick} />
+      <BtnContainer onClick={handleSlideClick} />
     </section>
   );
 }
